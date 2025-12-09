@@ -1,0 +1,62 @@
+#include <stdio.h>
+#define MAX 5
+
+int arr[MAX];
+int count = 0;
+
+void display() {
+    if(count == 0) {
+        printf("Array is empty\n");
+        return;
+    }
+    printf("Array elements: ");
+    for(int i = 0; i < count; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void insert(int pos, int value) {
+    if(count == MAX) {
+        printf("Array is full\n");
+        return;
+    }
+    if(pos < 0 || pos > count) {
+        printf("Invalid position\n");
+        return;
+    }
+    for(int i = count; i > pos; i--) {
+        arr[i] = arr[i-1];
+    }
+    arr[pos] = value;
+    count++;
+    printf("Inserted %d at position %d\n", value, pos);
+}
+
+void delete(int pos) {
+    if(count == 0) {
+        printf("Array is empty\n");
+        return;
+    }
+    if(pos < 0 || pos >= count) {
+        printf("Invalid position\n");
+        return;
+    }
+    printf("Deleted %d from position %d\n", arr[pos], pos);
+    for(int i = pos; i < count-1; i++) {
+        arr[i] = arr[i+1];
+    }
+    count--;
+}
+
+int main() {
+    insert(0, 10);
+    insert(1, 20);
+    insert(2, 30);
+    display();
+    delete(1);
+    display();
+    insert(1, 25);
+    display();
+    return 0;
+}
